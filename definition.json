@@ -1,0 +1,104 @@
+{
+  "version": "2.0.1",
+  "platformVersion": "15.5.3",
+  "authentication": {
+    "type": "custom",
+    "fields": [
+      {
+        "key": "apiKey",
+        "label": "API Key",
+        "required": true,
+        "helpText": "Found in your [WhatsAble Dashboard](https://dashboard.whatsable.app/keys/)."
+      }
+    ],
+    "test": "$func$2$f$",
+    "connectionLabel": "WhatsAble API Key ({{ bundle.inputData.email }})"
+  },
+  "beforeRequest": [
+    "$func$3$f$"
+  ],
+  "afterResponse": [
+    "$func$2$f$",
+    "$func$3$f$"
+  ],
+  "resources": {},
+  "triggers": {
+    "fetchNumbers": {
+      "key": "fetchNumbers",
+      "noun": "WhatsApp number",
+      "display": {
+        "label": "Your WhatsApp Numbers",
+        "description": "Triggers when added."
+      },
+      "operation": {
+        "perform": "$func$2$f$",
+        "outputFields": [
+          {
+            "key": "phone_number",
+            "label": "WhatsApp number"
+          }
+        ],
+        "sample": {
+          "id": 1,
+          "phone_number": "+1234567890"
+        }
+      }
+    }
+  },
+  "searches": {},
+  "creates": {
+    "send_message": {
+      "display": {
+        "description": "Sends a WhatsApp message to the designated number. ",
+        "hidden": false,
+        "label": "Send WhatsApp Message"
+      },
+      "key": "send_message",
+      "noun": "Message",
+      "operation": {
+        "inputFields": [
+          {
+            "key": "phone",
+            "type": "text",
+            "helpText": "Verified phone number to send the message to. Select a number you registered in the [WhatsAble Dashboard](https://dashboard.whatsable.app/numbers/)",
+            "dynamic": "fetchNumbers.id.phone_number",
+            "altersDynamicFields": true
+          },
+          {
+            "key": "text",
+            "label": "Message Body",
+            "type": "text",
+            "helpText": "Enter the text of the message.",
+            "placeholder": "Your message text here...",
+            "required": true,
+            "list": false,
+            "altersDynamicFields": false
+          },
+          {
+            "key": "attachment",
+            "label": "Attachment",
+            "type": "string",
+            "helpText": "Enter the public link of image, video or document (Max 5MB for images, 16MB for video and 100MB for document)",
+            "required": false,
+            "list": false,
+            "altersDynamicFields": false
+          },
+          {
+            "key": "filename",
+            "label": "File Name",
+            "type": "string",
+            "helpText": "Enter the filename for the attachment.",
+            "required": false,
+            "list": false,
+            "altersDynamicFields": false
+          }
+        ],
+        "perform": "$func$2$f$",
+        "sample": {
+          "message": "Message sent successfully"
+        }
+      }
+    }
+  },
+  "searchOrCreates": {}
+}
