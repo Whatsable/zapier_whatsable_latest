@@ -27,6 +27,7 @@ module.exports = {
     sample: {
       id: 1,
       phone_number: '+1234567890',
+      last_message_at: '2025-05-22T12:00:00Z'
     }
   },
 }
