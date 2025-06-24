@@ -15,7 +15,7 @@ const subscribeHook = (z, bundle) => {
   };
 
   const options = {
-    url: 'https://api.insightssystem.com/api:ZFDnbu8D/store_webhook',
+    url: 'https://dashboard.whatsable.app/api/whatsapp/create_webhook',
     method: 'POST',
     body: data,
     headers: {
