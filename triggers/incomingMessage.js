@@ -145,6 +145,11 @@ module.exports = {
         key: "bot_timestamp",
         label: "Bot Last Message Time",
         type: "string"
+      },
+      {
+        key: "scheduled_messages",
+        label: "Scheduled Messages",
+        type: "string"
       }
     ]
   }

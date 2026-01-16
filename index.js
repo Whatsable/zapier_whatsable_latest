@@ -1,9 +1,9 @@
 const fetchNumbersTrigger = require('./triggers/fetchNumbers');
+const fetchGroupsTrigger = require('./triggers/fetchGroups');
 const createMessage = require('./creates/createMessage');
 const sendSessionMessage = require('./creates/sendSessionGroupMessage');
 const authentication = require('./authentication');
 const incomingMessageWebhook = require('./triggers/incomingMessage');
-const fetchSessionsSearch = require('./searches/fetchSessions');
 
 require('dotenv').config();
 
@@ -61,12 +61,8 @@ const App = {
   // If you want your trigger to show up, you better include it here!
   triggers: {
     [fetchNumbersTrigger.key]: fetchNumbersTrigger,
+    [fetchGroupsTrigger.key]: fetchGroupsTrigger,
     [incomingMessageWebhook.key]: incomingMessageWebhook,
-  },
-
-  // If you want your searches to show up, you better include it here!
-  searches: {
-    [fetchSessionsSearch.key]: fetchSessionsSearch,
   },
 
   // If you want your creates to show up, you better include it here!

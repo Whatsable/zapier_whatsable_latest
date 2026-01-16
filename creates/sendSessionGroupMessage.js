@@ -1,21 +1,41 @@
 const perform = async (z, bundle) => {
+  // The groupId is already the combined value (format: value_for_session_id)
+  const combinedValue = bundle.inputData.groupId;
+  
+  // Extract session_id and groupId from combined value (format: value_for_session_id)
+  const lastUnderscoreIndex = combinedValue.lastIndexOf('_');
+  
+  let sessionId, groupIdValue;
+  if (lastUnderscoreIndex !== -1) {
+    groupIdValue = combinedValue.substring(0, lastUnderscoreIndex); // value_for part (e.g., "120363405693454126@g.us")
+    sessionId = combinedValue.substring(lastUnderscoreIndex + 1); // session_id part (e.g., "705848f2-9c18-403a-92e8-2509d84ceb85")
+  } else {
+    // Fallback if format is unexpected
+    groupIdValue = combinedValue;
+    sessionId = combinedValue;
+  }
+  
   const options = {
-    url: 'http://91.98.45.220:3000/sessions/groups/send',
+    url: 'https://dashboard.whatsable.app/api/whatsapp/messages/v2.0.0/group-send',
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Accept: 'application/json',
     },
     body: {
-      session: bundle.inputData.session,
-      groupId: bundle.inputData.to,
+      session: sessionId,
+      groupId: groupIdValue,
       message: bundle.inputData.message,
     },
   };
 
   return z.request(options).then((response) => {
     response.throwForStatus();
-    return response.json;
+    const result = response.json;
+    
+    // Remove Group Message Id from response
+    const { 'Group Message Id': _, 'groupMessageId': __, 'group_message_id': ___, ...cleanResult } = result;
+    
+    return cleanResult;
   });
 };
 
@@ -23,33 +43,26 @@ module.exports = {
   key: 'send_session_message',
   noun: 'SessionMessage',
   display: {
-    label: 'Send Session Group Message',
-    description: 'Sends a message to a WhatsAble group from a chosen session.',
+    label: 'Send Group Message',
+    description: 'Sends a message to a WhatsAble group',
     hidden: false,
   },
   operation: {
     inputFields: [
       {
-        key: 'session',
-        type: 'string',
-        helpText: 'Select the WhatsAble session to send the message from.',
-        dynamic: 'fetchSessions.id.label',
-        altersDynamicFields: true,
-      },
-      {
-        key: 'to',
-        label: 'Group Id',
+        key: 'groupId',
+        label: 'Select a Group',
         type: 'text',
-        helpText: 'WhatsApp Group ID (e.g., 120363405693454126@g.us).',
+        helpText: 'Select a group from the WhatsAble Groups trigger.',
+        dynamic: 'fetchGroups.id.label_name',
         required: true,
-        list: false,
         altersDynamicFields: false,
       },
       {
         key: 'message',
         label: 'Message',
         type: 'text',
-        helpText: 'Message text to send through the selected session.',
+        helpText: 'Message text to send to the group.',
         required: true,
         list: false,
         altersDynamicFields: false,
@@ -57,10 +70,8 @@ module.exports = {
     ],
     perform: perform,
     sample: {
-      session: 'test-akash',
-      to: '120363405693454126@g.us',
-      message: 'Hello group! This message send from our whatsapp server to customer success group',
-      status: 'sent',
+      groupId: '120363405693454126@g.us_705848f2-9c18-403a-92e8-2509d84ceb85',
+      message: 'Hello group! This message is sent from our WhatsApp server.',
     },
   },
 };
