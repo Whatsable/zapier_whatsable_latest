@@ -2,6 +2,7 @@ const fetchNumbersTrigger = require('./triggers/fetchNumbers');
 const fetchGroupsTrigger = require('./triggers/fetchGroups');
 const createMessage = require('./creates/createMessage');
 const sendSessionMessage = require('./creates/sendSessionGroupMessage');
+const getMessageStatus = require('./creates/getMessageStatus');
 const authentication = require('./authentication');
 const incomingMessageWebhook = require('./triggers/incomingMessage');
 
@@ -69,6 +70,7 @@ const App = {
   creates: {
     [createMessage.key]: createMessage,
     [sendSessionMessage.key]: sendSessionMessage,
+    [getMessageStatus.key]: getMessageStatus,
   }
 };
 
