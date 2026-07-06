@@ -28,6 +28,7 @@ module.exports = {
   display: {
     label: 'WhatsAble Groups',
     description: 'Triggers when groups are retrieved from WhatsAble.',
+    hidden: true,
   },
   operation: {
     perform: fetchGroups,

@@ -1,16 +1,26 @@
 {
   "name": "whatsable_zapier_v2",
-  "version": "2.0.5",
+  "version": "4.0.1",
   "description": "",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "authentication.js",
+    "constants.js",
+    "timezones.js",
+    "whatsableApi.js",
+    "creates/**",
+    "triggers/**",
+    "zapierwrapper.js"
+  ],
   "scripts": {
     "test": "jest --testTimeout 10000"
   },
   "dependencies": {
-    "zapier-platform-core": "15.5.3"
+    "zapier-platform-core": "19.0.0"
   },
   "devDependencies": {
     "jest": "^29.6.0"
   },
-  "private": true
+  "private": true 
 }

@@ -18,6 +18,7 @@ module.exports = {
   display: {
     label: 'Your WhatsApp Numbers',
     description: 'Triggers when added.',
+    hidden: true,
   },
   operation: {
     perform: fetchNumbers,
