@@ -16,7 +16,7 @@ module.exports = {
       label: 'API Key',
       required: true,
       helpText:
-        'Paste your API key from [WhatsAble Dashboard](https://dashboard.whatsable.app/). Works with WhatsAble, Notifier by WhatsAble, or Notifyer System — the app is detected automatically.',
+        'Paste your API key from [notifyer.whatsable.app](https://notifyer.whatsable.app/api-key).',
     },
   ],
 

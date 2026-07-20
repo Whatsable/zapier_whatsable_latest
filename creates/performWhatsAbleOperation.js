@@ -113,7 +113,7 @@ const stringField = (key, label, helpText, required = true, extra = {}) => ({
 
 const SCHEDULE_DATETIME_INFO = `**Schedule date and time**
 
-Use the **Scheduled Date and Time** field to pick or map a date/time. Zapier sends ISO 8601 (for example, \`2026-06-08T17:20:00+02:00\`), which is converted to \`2026-06-08 17:20\` before sending to WhatsAble.
+Use the **Scheduled Date and Time** field to pick or map a date/time. Zapier sends ISO 8601 (for example, \`2026-06-08T17:20:00+02:00\`), which is converted to \`2026-06-08T17:20:00.000Z\` before sending to WhatsAble.
 
 Then select your **Timezone** below (for example, Europe/Berlin).`;
 
@@ -142,7 +142,7 @@ const scheduleDatetimeField = (key) => ({
   type: 'datetime',
   required: true,
   helpText:
-    'Pick or map a date and time. Zapier passes ISO 8601 (e.g. 2026-06-08T17:20:00+02:00), converted to 2026-06-08 17:20 for the API. Choose the matching Timezone below.',
+    'Pick or map a date and time. Zapier passes ISO 8601 (e.g. 2026-06-08T17:20:00+02:00), sent to the API as 2026-06-08T17:20:00.000Z. Choose the matching Timezone below.',
 });
 
 const timezoneField = (key, helpText) => ({

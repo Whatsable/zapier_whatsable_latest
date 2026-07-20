@@ -1083,7 +1083,7 @@ const formatScheduleDatetimeForApi = (value, fieldLabel = 'Scheduled Date and Ti
     throw new Error(`${fieldLabel} must use format 2026-06-08 17:20`);
   }
 
-  return `${parts.year}-${parts.month}-${parts.day} ${parts.hour}:${parts.minute}`;
+  return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}:${parts.second}.000Z`;
 };
 
 const formatTemplateScheduleDatetime = formatScheduleDatetimeForApi;

@@ -1,28 +1,28 @@
 const { formatScheduleDatetimeForApi } = require('../whatsableApi');
 
 describe('formatScheduleDatetimeForApi', () => {
-  it('extracts legacy wall-clock time from Zapier ISO with Z suffix', () => {
-    expect(formatScheduleDatetimeForApi('2026-06-08T17:20:00Z')).toBe('2026-06-08 17:20');
+  it('extracts wall-clock time from Zapier ISO with Z suffix', () => {
+    expect(formatScheduleDatetimeForApi('2026-07-07T18:00:00Z')).toBe('2026-07-07T18:00:00.000Z');
   });
 
-  it('extracts legacy wall-clock time from Zapier ISO with compact offset', () => {
-    expect(formatScheduleDatetimeForApi('2026-06-08T17:20:00+0200')).toBe('2026-06-08 17:20');
+  it('extracts wall-clock time from Zapier ISO with compact offset', () => {
+    expect(formatScheduleDatetimeForApi('2026-06-08T17:20:00+0200')).toBe('2026-06-08T17:20:00.000Z');
   });
 
-  it('extracts legacy wall-clock time from Zapier ISO with colon offset', () => {
-    expect(formatScheduleDatetimeForApi('2026-06-08T17:20:00+02:00')).toBe('2026-06-08 17:20');
+  it('extracts wall-clock time from Zapier ISO with colon offset', () => {
+    expect(formatScheduleDatetimeForApi('2026-06-08T17:20:00+02:00')).toBe('2026-06-08T17:20:00.000Z');
   });
 
   it('keeps legacy space-separated input', () => {
-    expect(formatScheduleDatetimeForApi('2026-06-08 17:20')).toBe('2026-06-08 17:20');
+    expect(formatScheduleDatetimeForApi('2026-06-08 17:20')).toBe('2026-06-08T17:20:00.000Z');
   });
 
   it('keeps ISO datetime without timezone suffix', () => {
-    expect(formatScheduleDatetimeForApi('2026-06-08T17:20:00')).toBe('2026-06-08 17:20');
+    expect(formatScheduleDatetimeForApi('2026-06-08T17:20:00')).toBe('2026-06-08T17:20:00.000Z');
   });
 
   it('defaults date-only Zapier values to midnight', () => {
-    expect(formatScheduleDatetimeForApi('2026-06-08')).toBe('2026-06-08 00:00');
+    expect(formatScheduleDatetimeForApi('2026-06-08')).toBe('2026-06-08T00:00:00.000Z');
   });
 
   it('throws when the value is missing', () => {
