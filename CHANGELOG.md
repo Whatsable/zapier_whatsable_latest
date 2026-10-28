@@ -1,3 +1,10 @@
+## 4.0.2
+
+Scheduled follow-ups keep the clock time the Zap mapped and use the Timezone dropdown.
+
+1. Change Scheduled Date and Time from a datetime field to plain text, so Zapier no longer rewrites the value into the Zap account timezone
+2. Send that clock time with no `Z` or offset, plus the selected timezone as `time_zone`
+
 ## 4.0.1
 
 Fix trigger sample data and auth help.

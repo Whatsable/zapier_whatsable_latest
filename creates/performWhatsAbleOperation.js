@@ -113,9 +113,9 @@ const stringField = (key, label, helpText, required = true, extra = {}) => ({
 
 const SCHEDULE_DATETIME_INFO = `**Schedule date and time**
 
-Use the **Scheduled Date and Time** field to pick or map a date/time. Zapier sends ISO 8601 (for example, \`2026-06-08T17:20:00+02:00\`), which is converted to \`2026-06-08T17:20:00.000Z\` before sending to WhatsAble.
+Enter the clock time in the **Timezone** you select below, for example \`2026-10-27 19:30\` or \`2026-10-27T19:30:00\`.
 
-Then select your **Timezone** below (for example, Europe/Berlin).`;
+If a mapped value includes \`Z\` or an offset such as \`+00:00\`, only the clock numbers are kept. That offset is not the send time. The Timezone field is.`;
 
 const RELATIVE_SCHEDULE_INFO = `**Send after a delay (relative schedule)**
 
@@ -139,10 +139,13 @@ const copyField = (key, label, helpText) => ({
 const scheduleDatetimeField = (key) => ({
   key,
   label: 'Scheduled Date and Time',
-  type: 'datetime',
+  // string, not datetime. A datetime field rewrites the mapped value into the Zap
+  // account timezone before this code runs, which moves the clock (a 19:30 UTC value
+  // becomes 15:30 in a UTC-4 account). The Timezone dropdown below is the zone.
+  type: 'string',
   required: true,
   helpText:
-    'Pick or map a date and time. Zapier passes ISO 8601 (e.g. 2026-06-08T17:20:00+02:00), sent to the API as 2026-06-08T17:20:00.000Z. Choose the matching Timezone below.',
+    'Clock time in the Timezone below, for example 2026-10-27 19:30. A mapped value may include Z or an offset; only the clock numbers are sent, together with the Timezone.',
 });
 
 const timezoneField = (key, helpText) => ({
