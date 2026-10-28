@@ -1,4 +1,4 @@
-## 4.0.2
+## 4.0.3
 
 Scheduled follow-ups keep the clock time the Zap mapped and use the Timezone dropdown.
 
